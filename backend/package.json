@@ -1,0 +1,20 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "A production-ready FastAPI backend for carbon-efficient AI query routing. The system intelligently routes queries to the most carbon-efficient AI model while maintaining quality standards.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "directories": {
+    "example": "examples",
+    "test": "tests"
+  }
+}

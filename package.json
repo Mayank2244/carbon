@@ -1,0 +1,27 @@
+{
+  "name": "carbon",
+  "version": "1.0.0",
+  "description": "*Reduce AI carbon footprint by 84% without sacrificing quality through intelligent, carbon-aware orchestration.*",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "dependencies": {
+    "express": "^5.2.1"
+  },
+  "directories": {
+    "doc": "docs"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Mayank2244/CarbonSense_Ai.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Mayank2244/CarbonSense_Ai/issues"
+  },
+  "homepage": "https://github.com/Mayank2244/CarbonSense_Ai#readme"
+}

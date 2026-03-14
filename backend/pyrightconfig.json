@@ -1,0 +1,12 @@
+{
+  "venvPath": "/Users/mayank/Downloads/CarbonSense_Ai-main/backend",
+  "venv": "venv",
+  "pythonVersion": "3.11",
+  "pythonPlatform": "Darwin",
+  "typeCheckingMode": "off",
+  "useLibraryCodeForTypes": true,
+  "reportMissingImports": false,
+  "reportMissingModuleSource": false,
+  "reportUndefinedVariable": false,
+  "reportGeneralTypeIssues": false
+}

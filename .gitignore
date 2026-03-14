@@ -1,0 +1,46 @@
+backend/models/
+*.safetensors
+*.bin
+# Dependencies
+node_modules/
+backend/venv/
+backend/env/
+backend/.venv/
+
+# Environment
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+backend/data/
+backend/vector_store/
+backend/chroma_data/
+
+# Logs
+*.log
+backend/logs/
+
+# Build outputs
+dist/
+build/
+backend/__pycache__/
+*.py[cod]
+
+# OS Files
+.DS_Store
+Thumbs.db
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Project specific
+backend/backend.log

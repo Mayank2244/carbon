@@ -1,0 +1,102 @@
+version: '3.8'
+
+services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: carbonsense_postgres
+    environment:
+      POSTGRES_USER: carbonsense
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: carbonsense_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U carbonsense"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - carbonsense_network
+
+  # Redis Cache
+  redis:
+    image: redis:7-alpine
+    container_name: carbonsense_redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - carbonsense_network
+
+  neo4j:
+    image: neo4j:5.14-community
+    container_name: carbonsense_neo4j
+    environment:
+      - NEO4J_AUTH=neo4j/password
+      - NEO4J_PLUGINS=["apoc"]
+      - NEO4J_dbms_security_procedures_unrestricted=apoc.*
+      - NEO4J_dbms_memory_heap_max__size=512M
+    ports:
+      - "7474:7474"  # HTTP Browser
+      - "7687:7687"  # Bolt Protocol
+    volumes:
+      - neo4j_data:/data
+      - neo4j_logs:/logs
+    networks:
+      - carbonsense_network
+    healthcheck:
+      test: ["CMD", "cypher-shell", "-u", "neo4j", "-p", "password", "RETURN 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+
+  # FastAPI Application
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: carbonsense_app
+    ports:
+      - "8000:8000"
+    volumes:
+      - ./app:/app/app
+      - ./alembic:/app/alembic
+      - ./alembic.ini:/app/alembic.ini
+      - ./db:/app/db
+      - ./examples:/app/examples
+      - ./scripts:/app/scripts
+    environment:
+      - DATABASE_URL=postgresql+psycopg://carbonsense:password@postgres:5432/carbonsense_db
+      - REDIS_URL=redis://carbonsense_redis:6379/0
+      - ENVIRONMENT=production
+      - DEBUG=False
+    env_file:
+      - .env
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - carbonsense_network
+    restart: unless-stopped
+
+volumes:
+  postgres_data:
+  redis_data:
+  neo4j_data:
+  neo4j_logs:
+
+networks:
+  carbonsense_network:
+    driver: bridge

@@ -1,0 +1,19 @@
+training:
+  num_episodes: 1000
+  max_steps_per_episode: 50
+  batch_size: 32
+  learning_rate: 0.1
+  discount_factor: 0.95
+  epsilon_start: 1.0
+  epsilon_end: 0.05
+  epsilon_decay: 0.995
+  checkpoint_interval: 100
+  evaluation_interval: 50
+
+environment:
+  carbon_intensity_range: [20, 300]
+  query_complexity_probs: [0.4, 0.4, 0.2] # Simple, Medium, Complex
+  
+visualization:
+  plot_dir: "logs/plots"
+  checkpoint_dir: "logs/checkpoints"

@@ -1,0 +1,58 @@
+{
+    "electricity_maps_response": {
+        "description": "Sample response from Electricity Maps API",
+        "endpoint": "GET /v3/carbon-intensity/latest",
+        "example": {
+            "zone": "US-CA",
+            "carbonIntensity": 250.5,
+            "datetime": "2024-01-08T10:00:00Z",
+            "updatedAt": "2024-01-08T10:05:00Z",
+            "fossilFuelPercentage": 35.2,
+            "renewablePercentage": 64.8
+        }
+    },
+    "watttime_login_response": {
+        "description": "Sample login response from WattTime API",
+        "endpoint": "GET /v2/login",
+        "example": {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+        }
+    },
+    "watttime_data_response": {
+        "description": "Sample data response from WattTime API",
+        "endpoint": "GET /v2/data",
+        "example": {
+            "ba": "CAISO_NORTH",
+            "moer": 1200.5,
+            "percent": 45.0,
+            "point_time": "2024-01-08T10:00:00Z"
+        },
+        "notes": "moer is in lbs CO2/MWh. Convert to gCO2/kWh: (moer * 453.592) / 1000"
+    },
+    "carbon_data_output": {
+        "description": "Standardized CarbonData output format",
+        "example": {
+            "carbon_intensity": 250.5,
+            "renewable_percentage": 64.8,
+            "fossil_fuel_percentage": 35.2,
+            "timestamp": "2024-01-08T10:00:00",
+            "data_source": "electricity_maps",
+            "region_code": "US-CA",
+            "latitude": 37.7749,
+            "longitude": -122.4194
+        }
+    },
+    "fallback_data": {
+        "description": "Global average fallback data when APIs fail",
+        "example": {
+            "carbon_intensity": 475.0,
+            "renewable_percentage": 29.0,
+            "fossil_fuel_percentage": 71.0,
+            "timestamp": "2024-01-08T10:00:00",
+            "data_source": "fallback",
+            "region_code": null,
+            "latitude": null,
+            "longitude": null
+        }
+    }
+}

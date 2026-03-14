@@ -1,0 +1,5 @@
+{
+    "query": "Act as a team of expert researchers. Design a trillion-dollar, real-world AI system. (v4 physics check)",
+    "max_tokens": 4000,
+    "use_cache": false
+}
